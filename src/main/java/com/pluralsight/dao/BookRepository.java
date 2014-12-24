@@ -11,4 +11,6 @@ public interface BookRepository {
     Collection<Book> getBooks();
 
     Book getBook(String id);
+
+    Book addBook(Book book);
 }
