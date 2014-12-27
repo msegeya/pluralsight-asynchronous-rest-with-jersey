@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
 
@@ -47,7 +48,7 @@ public class BookResource {
         ListenableFuture<Collection<Book>> booksFuture = bookRepository.getBooksAsync();
         Futures.addCallback(booksFuture, new FutureCallback<Collection<Book>>() {
             public void onSuccess(Collection<Book> result) {
-                response.resume(result);
+                response.resume(new GenericEntity<Collection<Book>>(result){});
             }
 
             public void onFailure(Throwable throwable) {
